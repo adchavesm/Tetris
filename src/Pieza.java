@@ -1,24 +1,15 @@
 
 import java.awt.Graphics;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author COMPAQ
- */
+
 public class Pieza {
 
     SuperficieDeDibujo superficieDeDibujo;
     Tablero tablero;
     Imagen imagen;
-    Dupla posicion = new Dupla(3, 1);
+    Dupla posicion = new Dupla(5, 1);
     Tetrimino PA = Tetrimino.Aleatorio();
     Tetrimino Proximos[] = new Tetrimino[7];
-
 
     public Pieza(SuperficieDeDibujo superficieDeDibujo) {
         this.superficieDeDibujo = superficieDeDibujo;
@@ -26,25 +17,20 @@ public class Pieza {
         this.imagen = superficieDeDibujo.imagen;
         for (int i = 0; i < Proximos.length; i++) {
             Proximos[i] = Tetrimino.Aleatorio();
-
         }
-
     }
 
     public void dibujar(Graphics g) {
-
         for (int i = 0; i < 4; i++) {
             imagen.dibujarPeriferico(new Dupla(posicion.X + PA.periferico[i].X, posicion.Y + PA.periferico[i].Y), g, PA.nombre);
         }
-        
         for (int i = 0; i < Proximos.length; i++) {
-            Dupla pos = new  Dupla (12, 5);
+            Dupla pos = new Dupla(12, 1 + i * 3);
             for (int j = 0; j < Proximos[i].periferico.length; j++) {
-                double XReal = Proximos[0].periferico[j].X+pos.X;
-                double YReal = Proximos[0].periferico[j].Y+pos.Y;
-                imagen.dibujarPeriferico(new Dupla(XReal, YReal), g, Proximos[0].nombre);
+                double XReal = Proximos[i].periferico[j].X + pos.X;
+                double YReal = Proximos[i].periferico[j].Y + pos.Y;
+                imagen.dibujarPeriferico(new Dupla(XReal, YReal), g, Proximos[i].nombre);
             }
-            
         }
     }
 
@@ -57,29 +43,49 @@ public class Pieza {
         Proximos[Proximos.length - 1] = Tetrimino.Aleatorio();
     }
 
+    public void almacenarEnTablero() {
+        for (int i = 0; i < PA.periferico.length; i++) {
+            int columna = PA.periferico[i].intX() + posicion.intX(),
+                    fila = PA.periferico[i].intY() + posicion.intY();
+            String dato = PA.nombre;
+
+            tablero.Tablero[columna][fila] = dato;
+        }
+    }
+
+    public void girarDerecha() {
+        PA.girarDerecha();
+        if (MovimientoErroneo()) {
+            PA.girarIzquierda();
+        }
+    }
+    
     public void MoverDerecha() {
         posicion.moverDerecha();
-        if (MoimientoErroneo()) {
+        if (MovimientoErroneo()) {
             posicion.moverIzquierda();
         }
     }
 
     public void MoverIzquierda() {
         posicion.moverIzquierda();
-        if (MoimientoErroneo()) {
+        if (MovimientoErroneo()) {
             posicion.moverDerecha();
         }
     }
 
     public void MoverAbajo() {
         posicion.moverAbajo();
-        if (MoimientoErroneo()) {
+        if (MovimientoErroneo()) {
             posicion.moverArriba();
+            System.out.println("Depositando pieza y reiniciando");
+            almacenarEnTablero();
             Reiniciar();
+            tablero.borrarLineas();
         }
     }
 
-    public boolean MoimientoErroneo() {
+    public boolean MovimientoErroneo() {
         for (int i = 0; i < PA.periferico.length; i++) {
             double XReal = PA.periferico[i].X + posicion.X;
             double YReal = PA.periferico[i].Y + posicion.Y;
@@ -89,7 +95,9 @@ public class Pieza {
             if (YReal > tablero.FILAS - 1) {
                 return true;
             }
-
+            if (!tablero.Obtener((int) XReal, (int) YReal).equals("")) {
+                return true;
+            }
         }
         return false;
     }
