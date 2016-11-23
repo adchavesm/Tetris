@@ -38,7 +38,7 @@ public class Tetrimino {
             case "O":
                 return new Tetrimino(new Dupla(0, 0), new Dupla(0, -1), new Dupla(1, -1), new Dupla(1, 0), "O");
             case "I":
-                return new Tetrimino(new Dupla(0, 0), new Dupla(-1, 0), new Dupla(1, 0), new Dupla(0, 0), "I");
+                return new Tetrimino(new Dupla(0, 0), new Dupla(-1, 0), new Dupla(1, 0), new Dupla(2, 0), "I");
         }
         //Tetrimino vacio (predeterminado)
         return new Tetrimino(new Dupla(0, 0), new Dupla(0, 0), new Dupla(0, 0), new Dupla(0, 0), "");

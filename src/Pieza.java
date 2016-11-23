@@ -15,8 +15,8 @@ public class Pieza {
     SuperficieDeDibujo superficieDeDibujo;
     Tablero tablero;
     Imagen imagen;
-    Dupla posicion =  new Dupla(3,10);
-    Tetrimino Z = Tetrimino.consultar("Z");
+    Dupla posicion =  new Dupla(3,1);
+    Tetrimino Z = Tetrimino.consultar("O");
 
     public Pieza(SuperficieDeDibujo superficieDeDibujo) {
         this.superficieDeDibujo = superficieDeDibujo;

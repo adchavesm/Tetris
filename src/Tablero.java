@@ -53,7 +53,7 @@ public class Tablero {
 
                 //dibujar posicion detro de la casilla
                 g.setFont(new Font("verdana", Font.PLAIN, 9));
-                g.drawString(X + "," + Y, (int) posTemp.X, (int) posTemp.Y + 11);
+                //g.drawString(X + "," + Y, (int) posTemp.X, (int) posTemp.Y + 11);//Pone conrdenadas en la matris
             }
         }
 

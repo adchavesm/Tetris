@@ -65,7 +65,7 @@ public class ControlPrincipal {
             dibujar();
 
             if (System.nanoTime() - tiempoDeReferenciaContador >= NS_POR_ACTUALIZACION) {//Cada segundo se muestre letrero con actualizaciones por segundo y fotogramas por segundo
-                System.out.println("APS = " + APS + "FPS = " + FPS);
+                //System.out.println("APS = " + APS + "FPS = " + FPS);
                 tiempoDeReferenciaContador = System.nanoTime();
                 APS = 0;
                 FPS = 0;

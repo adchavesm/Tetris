@@ -1,5 +1,6 @@
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.JFrame;
 
 /*
@@ -24,6 +25,8 @@ public class Ventana extends JFrame{
             this.pack();
             this.setLocationRelativeTo(null);//Centra la ventana en la pantalla
             this.setVisible(true);//Hace visible la ventana
+
+
     }
     
 }
