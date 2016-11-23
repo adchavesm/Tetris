@@ -31,6 +31,7 @@ public class SuperficieDeDibujo extends Canvas{
         setSize(ancho, alto);
         tablero = new Tablero(this);
         imagen = new Imagen(this);
+        tablero.imagen=imagen;
         pieza = new Pieza(this);
         CapturarTeclas();
         setFocusable(true);
@@ -49,10 +50,9 @@ public class SuperficieDeDibujo extends Canvas{
         g = buffer.getDrawGraphics();//g dibuje en el buffer
         
         //Aca se dibuja todo lo necesario
-        g.setColor(Color.LIGHT_GRAY);
-        g.fillRect(0, 0, this.getWidth(), this.getHeight());
-        g.setColor(Color.BLACK);
         
+        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        g.setColor(Color.lightGray);
         tablero.dibujar(g);
         pieza.dibujar(g);
         
@@ -84,7 +84,11 @@ public class SuperficieDeDibujo extends Canvas{
                     pieza.MoverAbajo();
                     return;
                 }else if(ke.getKeyCode()==KeyEvent.VK_UP){//Girar
-                    pieza.PA.girarDerecha();
+                    pieza.girarDerecha();
+                    return;
+                }
+                if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) {//Pausa
+                    pieza.PausarReanudar();
                     return;
                 }
             }

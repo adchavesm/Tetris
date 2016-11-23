@@ -1,8 +1,7 @@
 
 import java.awt.Graphics;
 
-
-public class Pieza {
+public class Pieza implements Runnable {
 
     SuperficieDeDibujo superficieDeDibujo;
     Tablero tablero;
@@ -11,6 +10,9 @@ public class Pieza {
     Tetrimino PA = Tetrimino.Aleatorio();
     Tetrimino Proximos[] = new Tetrimino[7];
 
+    Thread Hilo = new Thread(this);
+    boolean EstadoDelHilo = true;
+
     public Pieza(SuperficieDeDibujo superficieDeDibujo) {
         this.superficieDeDibujo = superficieDeDibujo;
         this.tablero = superficieDeDibujo.tablero;
@@ -18,6 +20,7 @@ public class Pieza {
         for (int i = 0; i < Proximos.length; i++) {
             Proximos[i] = Tetrimino.Aleatorio();
         }
+        Hilo.start();
     }
 
     public void dibujar(Graphics g) {
@@ -59,7 +62,7 @@ public class Pieza {
             PA.girarIzquierda();
         }
     }
-    
+
     public void MoverDerecha() {
         posicion.moverDerecha();
         if (MovimientoErroneo()) {
@@ -100,6 +103,27 @@ public class Pieza {
             }
         }
         return false;
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (true) {
+                MoverAbajo();
+                Thread.sleep(1000); //por ahora descansará 1 segundo
+            }
+        } catch (Exception e) {//Se ejecuta si error
+            System.out.println("ERROR EN EL THREAD");
+        }
+           
+    }
+    public void PausarReanudar() {
+        if (EstadoDelHilo) {
+            Hilo.suspend();//pausa
+        } else {
+            Hilo.resume(); //reanuda
+        }
+        EstadoDelHilo = !EstadoDelHilo;
     }
 
 }
