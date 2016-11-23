@@ -49,7 +49,7 @@ public class SuperficieDeDibujo extends Canvas{
         g = buffer.getDrawGraphics();//g dibuje en el buffer
         
         //Aca se dibuja todo lo necesario
-        g.setColor(Color.WHITE);
+        g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
         g.setColor(Color.BLACK);
         
@@ -75,13 +75,16 @@ public class SuperficieDeDibujo extends Canvas{
             @Override
             public void keyPressed(KeyEvent ke) {//cuando se preciona una tecla
                 if(ke.getKeyCode()==KeyEvent.VK_RIGHT){//Derecha
-                    pieza.posicion.moverDerecha();
+                    pieza.MoverDerecha();
                     return;
                 }else if(ke.getKeyCode()==KeyEvent.VK_LEFT){//Izquierda
-                    pieza.posicion.moverIzquierda();
+                    pieza.MoverIzquierda();
                     return;
                 }else if(ke.getKeyCode()==KeyEvent.VK_DOWN){//Abajo
-                    pieza.posicion.moverAbajo();
+                    pieza.MoverAbajo();
+                    return;
+                }else if(ke.getKeyCode()==KeyEvent.VK_UP){//Girar
+                    pieza.PA.girarDerecha();
                     return;
                 }
             }

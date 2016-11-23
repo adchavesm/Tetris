@@ -47,6 +47,10 @@ public class Dupla {
     public void moverAbajo() {//Mueve un espacio hacia abajo
         Y++;
     }
+    
+    public void moverArriba() {//Mueve un espacio hacia abajo
+        Y--;
+    }
 
     public double getX() {
         return X;
@@ -62,6 +66,18 @@ public class Dupla {
 
     public void setY(double Y) {
         this.Y = Y;
+    }
+    
+    public void girarDerecha(){
+        double temp = X;
+        X = -Y;
+        Y = temp;
+    }
+    
+    public void girarIzquierda(){
+        double temp = X;
+        X = Y;
+        Y = -temp;
     }
 
 }

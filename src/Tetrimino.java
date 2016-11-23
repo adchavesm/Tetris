@@ -21,6 +21,11 @@ public class Tetrimino {
         periferico[3] = periferico3;
         this.nombre = nombre;
     }
+    
+    public static Tetrimino Aleatorio(){
+        String Todos[] ={"Z","S","J","L","T","O","I"};
+        return consultar(Todos[(int)(Math.random()*7)]);
+    }
 
     public static Tetrimino consultar(String nombre) {
         //consultar Nombre (Devuelve el mapa de las posiciones)
@@ -42,6 +47,20 @@ public class Tetrimino {
         }
         //Tetrimino vacio (predeterminado)
         return new Tetrimino(new Dupla(0, 0), new Dupla(0, 0), new Dupla(0, 0), new Dupla(0, 0), "");
+    }
+    
+    public void girarDerecha(){
+        for (int i = 0; i < periferico.length; i++) {
+            periferico[i].girarDerecha();
+            
+        }
+    }
+    
+    public void girarIzquierda(){
+        for (int i = 0; i < periferico.length; i++) {
+            periferico[i].girarIzquierda();
+            
+        }
     }
 
 }

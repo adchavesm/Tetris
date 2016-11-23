@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /*
@@ -28,7 +29,30 @@ public class Imagen {
         return new Dupla (X,Y);
     }
 
-    public void dibujarPeriferico(Dupla pos, Graphics g) {//Dibuja dentro del buffer
+    public void dibujarPeriferico(Dupla pos, Graphics g, String tipo) {//Dibuja dentro del buffer
+        switch(tipo){
+            case"Z":
+                g.setColor(Color.ORANGE);
+                break;
+            case"S":
+                g.setColor(Color.RED);
+                break;
+            case"J":
+                g.setColor(Color.GREEN);
+                break;
+            case"L":
+                g.setColor(Color.BLUE);
+                break;
+            case"T":
+                g.setColor(Color.MAGENTA);
+                break;
+            case"O":
+                g.setColor(Color.YELLOW);
+                break;
+            case"I":
+                g.setColor(Color.cyan);
+                break;
+        }
         g.fillRect((int)calcularPosicion(pos).X, (int)calcularPosicion(pos).Y, lado, lado);
     }
 }
