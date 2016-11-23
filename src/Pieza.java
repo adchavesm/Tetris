@@ -8,7 +8,7 @@ public class Pieza implements Runnable {
     Imagen imagen;
     Dupla posicion = new Dupla(5, 1);
     Tetrimino PA = Tetrimino.Aleatorio();
-    Tetrimino Proximos[] = new Tetrimino[7];
+    Tetrimino Proximos[] = new Tetrimino[1];
 
     Thread Hilo = new Thread(this);
     boolean EstadoDelHilo = true;
@@ -24,11 +24,12 @@ public class Pieza implements Runnable {
     }
 
     public void dibujar(Graphics g) {
+        
         for (int i = 0; i < 4; i++) {
             imagen.dibujarPeriferico(new Dupla(posicion.X + PA.periferico[i].X, posicion.Y + PA.periferico[i].Y), g, PA.nombre);
         }
         for (int i = 0; i < Proximos.length; i++) {
-            Dupla pos = new Dupla(12, 1 + i * 3);
+            Dupla pos = new Dupla(15, 7);
             for (int j = 0; j < Proximos[i].periferico.length; j++) {
                 double XReal = Proximos[i].periferico[j].X + pos.X;
                 double YReal = Proximos[i].periferico[j].Y + pos.Y;
