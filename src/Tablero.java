@@ -1,8 +1,10 @@
 
+import java.awt.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
+import java.awt.event.*;
 
 
 /*
@@ -22,11 +24,13 @@ public class Tablero {
 
     String Tablero[][];
     SuperficieDeDibujo superficieDeDibujo;
-    int anchoSDD, altoSDD;
+    int anchoSDD, altoSDD, puntaje;
     Dupla posicion;
     Imagen imagen;
+    Puntuacion myWindow;
 
     public Tablero(SuperficieDeDibujo superficieDeDibujo) {
+        this.myWindow = new Puntuacion("");
         this.superficieDeDibujo = superficieDeDibujo;
         calcularPosicion();
         Tablero = new String[COLUMNAS][FILAS];
@@ -57,7 +61,6 @@ public class Tablero {
 
                     g.setColor(Color.BLACK);
 
-
                     if ((X + Y) % 2 == 0) {
                         g.setColor(Color.LIGHT_GRAY);
                     } else {
@@ -74,17 +77,17 @@ public class Tablero {
                 }
 
                 //psicion y dimenciones de la casilla
-
                 //dibujar posicion detro de la casilla
                 g.setFont(new Font("verdana", Font.PLAIN, 9));
 
                 //g.drawString(X + "," + Y, (int) posTemp.X, (int) posTemp.Y + 11);//Pone conrdenadas en la matris
             }
         }
-        
+
     }
-     public void borrarLineas() {
-        int Y = FILAS - 1, lineas = 0;
+
+    public void borrarLineas() {
+        int Y = FILAS - 1;
 
         while (Y >= 0) {
             int X = 0;
@@ -94,15 +97,14 @@ public class Tablero {
             }
 
             if (X == COLUMNAS) {
-                lineas++;
+                puntaje += 10;
                 bajarLineas(Y);
             } else {
                 Y--;
             }
 
         }
-        //Aqui aumentaran las lineas para el puntaje
-        System.out.println("Lineas = " + lineas);
+        System.out.println("Puntaje = " + puntaje);
     }
 
     public void bajarLineas(int Y) {
@@ -112,19 +114,37 @@ public class Tablero {
 
         while (Y >= 0) {
             for (int X = 0; X < COLUMNAS; X++) {
-                Tablero[X][Y] = Y==0?"":Tablero[X][Y-1];
+                Tablero[X][Y] = Y == 0 ? "" : Tablero[X][Y - 1];
             }
             Y--;
         }
     }
 
-    public String Obtener(int x,int y){
-        if(y>=0){
-           return Tablero[x][y]; 
-        }   
-        return "";
-    }                    
-        
+    public void finDeJuego() {
+        int X = COLUMNAS - 1;
+        while (X >= 0) {
+            int Y = 1;
+            int Z = 0;
+            while (Y >= 0 && !Tablero[X][Y].equals("")) {
+                Z = 1;
+                Y--;
+            }
+            X--;
+            if (Z == 1) {
+
+                String PuntajeL = String.valueOf(puntaje);
+                X = -1;
+                System.out.println("hoaaaaaa");
+                myWindow.main(PuntajeL);
+            }
+        }
     }
 
+    public String Obtener(int x, int y) {
+        if (y >= 0) {
+            return Tablero[x][y];
+        }
+        return "";
+    }
 
+}

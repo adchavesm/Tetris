@@ -52,7 +52,7 @@ public class SuperficieDeDibujo extends Canvas{
         //Aca se dibuja todo lo necesario
         
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
-        g.setColor(Color.lightGray);
+        g.setColor(Color.BLUE);
         tablero.dibujar(g);
         pieza.dibujar(g);
         

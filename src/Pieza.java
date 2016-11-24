@@ -6,7 +6,7 @@ public class Pieza implements Runnable {
     SuperficieDeDibujo superficieDeDibujo;
     Tablero tablero;
     Imagen imagen;
-    Dupla posicion = new Dupla(5, 1);
+    Dupla posicion = new Dupla(4, 1);
     Tetrimino PA = Tetrimino.Aleatorio();
     Tetrimino Proximos[] = new Tetrimino[1];
 
@@ -84,7 +84,9 @@ public class Pieza implements Runnable {
             posicion.moverArriba();
             System.out.println("Depositando pieza y reiniciando");
             almacenarEnTablero();
+            
             Reiniciar();
+            tablero.finDeJuego();
             tablero.borrarLineas();
         }
     }
